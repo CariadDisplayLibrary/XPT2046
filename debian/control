@@ -1,0 +1,19 @@
+Source: libdisplaycore-driver-xpt2046
+Section: libraries
+Priority: extra
+Maintainer: Matt Jenkins <matt@majenko.co.uk>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+
+Package: libdisplaycore-driver-xpt2046
+Section: libraries
+Architecture: all
+XBSC-Group: DisplayCore
+XBSC-Subgroup: Drivers
+Depends: libdisplaycore-core, libdspi-chipkit
+Provides: XPT2046.h
+Description: XPT2046 touchscreen driver
+ SPI connected XPT2046 resistive touch panel controller
+
+
+
