@@ -99,9 +99,6 @@ int XPT2046::getSample(uint8_t pin) {
 
 void XPT2046::sample() {
 
-    uint32_t temp;
-
-    temp = 0;
     pos.x = getSample(TOUCH_CMD_X);
     pos.y = getSample(TOUCH_CMD_Y);
 
