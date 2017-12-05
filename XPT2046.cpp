@@ -54,29 +54,63 @@ boolean XPT2046::isPressed() {
 }
 
 int XPT2046::getSample(uint8_t pin) {
-    int samples[XPT2046_SMPSIZE];
     _spi->setSpeed(1000000UL);
-    pressed = true;
-    uint32_t smpTot = 0;
-    for (int i = 0; i < XPT2046_SMPSIZE; i++) {
-        digitalWrite(_cs, LOW);
-        _spi->transfer(pin);
-        uint16_t in = _spi->transfer((uint8_t)0x00) << 8;
-        in |= _spi->transfer((uint8_t)0x00);
-        digitalWrite(_cs, HIGH);
-        samples[i] = in >> 3;
-        if (samples[i] == 0 || samples[i] == 4095) pressed = false;
-        smpTot += (in >> 3);
-    }
-
-    smpTot = smpTot / XPT2046_SMPSIZE;
-    return smpTot;
+    digitalWrite(_cs, LOW);
+    _spi->transfer(pin);
+    uint16_t in = _spi->transfer((uint8_t)0x00) << 8;
+    in |= _spi->transfer((uint8_t)0x00);
+    digitalWrite(_cs, HIGH);
+    return in >> 3;
 }
 
 void XPT2046::sample() {
 
-    pos.x = getSample(TOUCH_CMD_X);
-    pos.y = getSample(TOUCH_CMD_Y);
+    struct coord samples[XPT2046_SMPSIZE];
+    struct coord distances[XPT2046_SMPSIZE];
+    pressed = true;
+
+    int aveX = 0;
+    int aveY = 0;
+
+    for (int i = 0; i < XPT2046_SMPSIZE; i++) {
+        samples[i].x = getSample(TOUCH_CMD_X);
+        samples[i].y = getSample(TOUCH_CMD_Y);
+        if (samples[i].x == 0 || samples[i].x == 4095 || samples[i].y == 0 || samples[i].y == 4095) pressed = false;
+        aveX += samples[i].x;
+        aveY += samples[i].y;
+    }
+
+    aveX /= XPT2046_SMPSIZE;
+    aveY /= XPT2046_SMPSIZE;
+
+    for (int i = 0; i < XPT2046_SMPSIZE; i++) {
+        distances[i].x = i;
+        distances[i].y = ((aveX - samples[i].x) * (aveX - samples[i].x)) + ((aveY - samples[i].y) * (aveY - samples[i].y));
+    }
+
+    for (int i = 0; i < XPT2046_SMPSIZE-1; i++) {
+        for (int j = 0; j < XPT2046_SMPSIZE-1; j++) {
+            if (samples[j].y > samples[j+1].y) {
+                int yy = samples[j+1].y;
+                samples[j+1].y = samples[j].y;
+                samples[j].y = yy;
+                int xx = samples[j+1].x;
+                samples[j+1].x = samples[j].x;
+                samples[j].x = xx;
+            }
+        }
+    }
+
+
+    int tx = 0;
+    int ty = 0;
+    for (int i = 0; i < (XPT2046_SMPSIZE >> 1); i++) {
+        tx += samples[distances[i].x].x;
+        ty += samples[distances[i].x].y;
+    }
+
+    pos.x = tx / (XPT2046_SMPSIZE >> 1);
+    pos.y = ty / (XPT2046_SMPSIZE >> 1);
 }
 
 void XPT2046::setRotation(int r) {
