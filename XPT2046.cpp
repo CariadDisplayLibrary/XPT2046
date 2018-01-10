@@ -22,9 +22,9 @@ int XPT2046::x() {
         case 0:
             return x;
         case 3:
-            return _height - y;
+            return _height - 1 - y;
         case 2:
-            return _width - x;
+            return _width - 1 - x;
         case 1:
             return y;
     }
@@ -41,9 +41,9 @@ int XPT2046::y() {
         case 3:
             return x;
         case 2:
-            return _height - y;
+            return _height - 1 - y;
         case 1:
-            return _width - x;
+            return _width - 1 - x;
     }
     return 0;
 }
