@@ -49,7 +49,7 @@ int XPT2046::y() {
 }
 
 
-boolean XPT2046::isPressed() {
+bool XPT2046::isPressed() {
     return pressed;
 }
 

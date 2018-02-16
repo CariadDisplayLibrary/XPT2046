@@ -28,7 +28,7 @@ class XPT2046 : public Touch {
         void sample();
         int x();
         int y();
-        boolean isPressed();
+        bool isPressed();
 
         void initializeDevice();
 
@@ -36,7 +36,7 @@ class XPT2046 : public Touch {
 
     private:
         struct coord pos;
-        boolean pressed;
+        bool pressed;
         int _rotation;
         DSPI *_spi;
         uint8_t _cs;
