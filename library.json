@@ -1,21 +1,21 @@
 {
     "name": "XPT2046",
-    "keywords": "display, displaycore, tft, lcd, glcd, oled, graphics",
-    "description": "XPT2046 touchscreen driver",
-    "homepage": "http://displaycore.org/wiki/index.php?title=XPT2046",
+    "keywords": "display, displaycore, tft, lcd, glcd, oled, graphics, font",
+    "description": "XPT2046 for DisplayCore",
+    "homepage": "http://displaycore.org/wiki/index.php?title=Acorn",
     "repository":
     {
       "type": "git",
-      "url": "https://github.com/MajenkoLibraries/DisplayCore.git"
+      "url": "https://github.com/DisplayCore/XPT2046.git"
     },
-    "dependencies": [ { "name": "DisplayCore", "version": "1.18.8" } ],
+    "dependencies": [ { "name": "DisplayCore", "version": "2.1.0" } ],
     "export": {
-        "include": "Drivers/XPT2046"
+        "exclude": "debian"
     },
     "authors": {
         "name": "Majenko Technologies", "url": "http://majenko.co.uk"
     },
-    "version": "1.18.8",
+    "version": "2.0.6",
     "frameworks": "arduino",
     "platforms": "microchippic32"
 }
