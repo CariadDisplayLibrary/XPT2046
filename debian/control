@@ -12,7 +12,7 @@ XBSC-Group: DisplayCore
 XBSC-Subgroup: Drivers
 Depends: libdisplaycore-core, libdspi-chipkit
 Provides: XPT2046.h
-Description: XPT2046 touchscreen driver
+Description: XPT2046 Touchscreen
  SPI connected XPT2046 resistive touch panel controller
 
 
