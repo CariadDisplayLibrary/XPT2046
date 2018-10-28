@@ -6,10 +6,10 @@ Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.4
 
 Package: libdisplaycore-driver-xpt2046
-Section: main
 Architecture: all
 XBSC-Group: DisplayCore
 XBSC-Subgroup: Drivers
+XBSC-Subsubgroup: Touchscreen
 Depends: libdisplaycore-core, libdspi-chipkit
 Provides: XPT2046.h
 Description: XPT2046 Touchscreen
