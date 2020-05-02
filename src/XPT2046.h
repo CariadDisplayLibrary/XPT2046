@@ -1,7 +1,7 @@
 #ifndef _XPT2046_H
 #define _XPT2046_H
 
-#include <DisplayCore.h>
+#include <Cariad.h>
 #include <DSPI.h>
 
 class XPT2046 : public Touch {

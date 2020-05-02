@@ -1,16 +1,17 @@
-Source: libdisplaycore-driver-xpt2046
+Source: libcariad-driver-xpt2046
 Section: main
 Priority: extra
 Maintainer: Matt Jenkins <matt@majenko.co.uk>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.4
 
-Package: libdisplaycore-driver-xpt2046
+Package: libcariad-driver-xpt2046
+Replaces: libdisplaycore-driver-xpt2046
 Architecture: all
-XBSC-Group: DisplayCore
+XBSC-Group: Cariad
 XBSC-Subgroup: Drivers
 XBSC-Subsubgroup: Touchscreen
-Depends: libdisplaycore-core, libdspi-chipkit
+Depends: libcariad-core, libdspi-chipkit
 Provides: XPT2046.h
 Description: XPT2046 Touchscreen
  SPI connected XPT2046 resistive touch panel controller
